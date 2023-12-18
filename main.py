@@ -7,7 +7,7 @@ MessagesPlaceholder
 )
 from langchain.agents import OpenAIFunctionsAgent,AgentExecutor
 from dotenv import load_dotenv
-from tools.sql import  run_query_tool,list_tables
+from tools.sql import  run_query_tool,list_tables,describe_tables_tool
 from langchain.schema import SystemMessage
 load_dotenv()
 chat = ChatOpenAI()
@@ -19,7 +19,7 @@ prompt = ChatPromptTemplate(
         MessagesPlaceholder(variable_name="agent_scratchpad")
     ]
 )
-tools=[run_query_tool]
+tools=[run_query_tool,describe_tables_tool]
 agent = OpenAIFunctionsAgent(
     llm=chat,
     prompt=prompt,
